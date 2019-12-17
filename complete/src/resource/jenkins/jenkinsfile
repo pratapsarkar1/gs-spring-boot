@@ -1,6 +1,6 @@
 node {
 tools {
-    maven 'M3'
+    maven 'M2'
   }
    stage('init') {
       checkout scm
