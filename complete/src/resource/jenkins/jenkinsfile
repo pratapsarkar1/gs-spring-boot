@@ -3,9 +3,10 @@ node {
       checkout scm
    }
    stage('build') {
-      sh '''
+      
          def mvnHome = tool name: 'Apache Maven 3.6.3', type: 'maven'
-         ${mvnHome}/bin/mvn clean package
+         sh "${mvnHome}/bin/mvn -B -DskipTests clean package"
+         
          cd target
          cp ../src/main/resources/web.config web.config
          cp todo-app-java-on-azure-1.0-SNAPSHOT.jar app.jar 
@@ -17,3 +18,4 @@ node {
       resourceGroup: env.RES_GROUP, appName: env.WEB_APP, filePath: "**/todo.zip"
    }
 }
+
